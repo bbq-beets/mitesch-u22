@@ -33,7 +33,9 @@ jobs:
       # Runs a single command using the runners shell
       - name: ${{ matrix.m }}
         run: |
-          curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | jq '.compute.name'
+          vm=$(curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | jq '.compute.name')
+          echo "::notice::$vm"
+         
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
